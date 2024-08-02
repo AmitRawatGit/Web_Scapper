@@ -1,7 +1,7 @@
-<!--home.html-->
 {% load static %}
 <!DOCTYPE html>
 <html>
+
 <head>
 	<title>Web Scraper</title>
 	<style>
@@ -11,26 +11,30 @@
 			font-family: Arial, sans-serif;
 			background-color: #f2f2f2;
 		}
+
 		h1 {
 			margin: 20px;
 			text-align: center;
 			font-size: 40px;
 			color: #333;
 		}
+
 		form {
 			display: flex;
 			flex-direction: column;
 			align-items: center;
 			margin-top: 50px;
 		}
+
 		input[type="text"] {
 			padding: 10px;
 			border: none;
 			border-radius: 5px;
-			box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+			box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 			margin-bottom: 20px;
 			width: 400px;
 		}
+
 		button[type="submit"] {
 			padding: 10px 20px;
 			background-color: #4CAF50;
@@ -38,24 +42,47 @@
 			border: none;
 			border-radius: 5px;
 			cursor: pointer;
-			box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+			box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 		}
+
 		button[type="submit"]:hover {
 			background-color: #3e8e41;
+		}
+
+		#error-message {
+			color: red;
+			margin-bottom: 10px;
 		}
 	</style>
 	<link rel="stylesheet" href="{% static 'w3.css' %}">
 </head>
-<body><h1><b>Web Scraper</b></h1>
-	<div class="w3-center" ><img class="w3-round w3-hover-grayscale w3-card" src="{% static 'web-scrapings.jpg' %}" width="50%" height="400px"></div>
-	
-	<form method="post" action="{% url 'scrape' %}">
+
+<body>
+	<h1><b>Web Scraper</b></h1>
+	<div class="w3-center">
+		<img class="w3-round w3-hover-grayscale w3-card"
+			src="data:image/png;base64,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"
+			width="50%" height="380px">
+	</div>
+	<form id="scrapeForm" method="post" action="{% url 'scrape' %}">
 		{% csrf_token %}
-		<input type="text" name="url" placeholder="Enter URL here...">
+		<div id="error-message"></div>
+		<input type="text" name="url" id="url" placeholder="Enter URL here...">
 		<button type="submit">Scrape</button>
 	</form>
 
-	<br>
-
+	<script>
+		document.getElementById('scrapeForm').addEventListener('submit', function (event) {
+			var urlField = document.getElementById('url');
+			var errorMessage = document.getElementById('error-message');
+			if (urlField.value.trim() === '') {
+				event.preventDefault();
+				errorMessage.textContent = 'Please enter the URL';
+			} else {
+				errorMessage.textContent = '';
+			}
+		});
+	</script>
 </body>
+
 </html>
