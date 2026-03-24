@@ -15,6 +15,22 @@ st.set_page_config(
     layout="wide",
 )
 
+st.markdown("""
+<style>
+/* Hide Streamlit header */
+header {visibility: hidden;}
+
+/* Hide hamburger menu and footer */
+#MainMenu {visibility: hidden;}
+footer {visibility: hidden;}
+
+/* Remove top spacing */
+.block-container {
+    padding-top: 2rem;
+}
+</style>
+""", unsafe_allow_html=True)
+
 st.markdown(
     """
     <style>
@@ -23,7 +39,7 @@ st.markdown(
         color: #f3f4f6;
     }
     .block-container {
-        padding-top: 2rem;
+        padding-top: 4rem;
         padding-bottom: 2rem;
         max-width: 1200px;
     }
